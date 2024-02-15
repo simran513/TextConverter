@@ -15,6 +15,18 @@ export default function Textform(props) {
   const handleClearClick = () => {
     setText("")
   }
+  
+  const handleCopy =()=>{
+    var text = document.getElementById("mybox")
+    text.select()
+    navigator.clipboard.writeText(text.value)
+  }
+
+  const handleExtraSpace = () => {
+    let newtext = text.split(/[ ]+/)
+    setText(newtext.join(" "))
+  }
+
   const speak = () => {
     let msg = new SpeechSynthesisUtterance(text);
     window.speechSynthesis.speak(msg);
@@ -40,6 +52,8 @@ export default function Textform(props) {
       <button className="btn btn-primary" onClick={handleUpClick}>Convert to uppercase</button>
       <button className="btn btn-primary mx-3" onClick={handleLoClick}>Convert to lowercase</button>
       <button className="btn btn-primary mx-3" onClick={handleClearClick}>Clear text</button>
+      <button className="btn btn-primary mx-3" onClick={handleCopy}>Copy text</button>
+      <button className="btn btn-primary mx-3" onClick={handleExtraSpace}>Remove extra space</button>
       <button type="submit" onClick={speak} className="btn btn-warning mx-2 my-2" id="toggle">Speak</button>
     </div>
     <div className="container my-3">
