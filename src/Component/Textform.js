@@ -4,6 +4,7 @@ export default function Textform(props) {
   const handleUpClick = () => {
     let newText = text.toUpperCase();
     setText(newText)
+    props.showalert("Converted to uppercase", "success")
   }
   const handleOnChange = (event) => {
     setText(event.target.value)
@@ -11,20 +12,24 @@ export default function Textform(props) {
   const handleLoClick = () => {
     let newText = text.toLowerCase();
     setText(newText)
+    props.showalert("Converted to lowercase", "success")
   }
   const handleClearClick = () => {
     setText("")
+    props.showalert("Text cleared", "success")
   }
   
   const handleCopy =()=>{
     var text = document.getElementById("mybox")
     text.select()
     navigator.clipboard.writeText(text.value)
+    props.showalert("Text has been copied", "success")
   }
 
   const handleExtraSpace = () => {
     let newtext = text.split(/[ ]+/)
     setText(newtext.join(" "))
+    props.showalert("Extra spaces has been handeled", "success")
   }
 
   const speak = () => {
