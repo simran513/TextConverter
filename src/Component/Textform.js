@@ -4,6 +4,7 @@ export default function Textform(props) {
   const handleUpClick = () => {
     let newText = text.toUpperCase();
     setText(newText)
+    props.showalert("Converted to uppercase", "success")
   }
   const handleOnChange = (event) => {
     setText(event.target.value)
@@ -11,20 +12,24 @@ export default function Textform(props) {
   const handleLoClick = () => {
     let newText = text.toLowerCase();
     setText(newText)
+    props.showalert("Converted to lowercase", "success")
   }
   const handleClearClick = () => {
     setText("")
+    props.showalert("Text cleared", "success")
   }
   
   const handleCopy =()=>{
     var text = document.getElementById("mybox")
     text.select()
     navigator.clipboard.writeText(text.value)
+    props.showalert("Text has been copied", "success")
   }
 
   const handleExtraSpace = () => {
     let newtext = text.split(/[ ]+/)
     setText(newtext.join(" "))
+    props.showalert("Extra spaces has been handeled", "success")
   }
 
   const speak = () => {
@@ -44,8 +49,8 @@ export default function Textform(props) {
   const [text, setText] = useState('Enter text here');
   return (
     <>
-    <div className="container my-3">
-      <h1>{props.heading}</h1>
+    <div className="container my-2">
+      <h2>{props.heading}</h2>
       <div className="mb-3 my-3">
         <textarea className="form-control" value={text} onChange={handleOnChange} style={{backgroundColor: props.mode==='light'?'white':'#282e34', color: props.mode==='light'?'black':'white'}} id="mybox" rows="8"></textarea>
       </div>
@@ -56,11 +61,11 @@ export default function Textform(props) {
       <button className={`btn btn-${props.mode} mx-3`} onClick={handleExtraSpace}>Remove extra space</button>
       <button type="submit" onClick={speak} className="btn btn-warning mx-2 my-2" id="toggle">Speak</button>
     </div>
-    <div className="container my-3">
-      <h1>Your text summary</h1>
+    <div className="container my-2">
+      <h2>Your text summary</h2>
       <p>{text.replace(/\n/g, " ").split(' ').filter(value => value !== "").length} words and {text.trim().length } characters</p>
       <p>{0.008*text.replace(/\n/g, " ").split(' ').filter(value => value !== "").length} minutes to read</p>
-      <h3>Preview</h3>
+      <h4>Preview</h4>
       <p>{text.length===0?'Enter something to preview here':text}</p>
     </div>
     </>
