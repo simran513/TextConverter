@@ -20,9 +20,10 @@ export default function Textform(props) {
   }
   
   const handleCopy =()=>{
-    var text = document.getElementById("mybox")
-    text.select()
-    navigator.clipboard.writeText(text.value)
+    // var text = document.getElementById("mybox")
+    // text.select()
+    navigator.clipboard.writeText(text)
+    // document.getSelection().removeAllRanges()
     props.showalert("Text has been copied", "success")
   }
 
@@ -54,12 +55,12 @@ export default function Textform(props) {
       <div className="mb-3 my-3">
         <textarea className="form-control" value={text} onChange={handleOnChange} style={{backgroundColor: props.mode==='light'?'white':'#282e34', color: props.mode==='light'?'black':'white'}} id="mybox" rows="8"></textarea>
       </div>
-      <button className={`btn btn-${props.mode} mx-2 my-2`} onClick={handleUpClick}>Convert to uppercase</button>
-      <button className={`btn btn-${props.mode} mx-2 my-2`} onClick={handleLoClick}>Convert to lowercase</button>
-      <button className={`btn btn-${props.mode} mx-2 my-2`} onClick={handleClearClick}>Clear text</button>
-      <button className={`btn btn-${props.mode} mx-2 my-2`} onClick={handleCopy}>Copy text</button>
-      <button className={`btn btn-${props.mode} mx-2 my-2`} onClick={handleExtraSpace}>Remove extra space</button>
-      <button type="submit" onClick={speak} className="btn btn-warning mx-2 my-2" id="toggle">Speak</button>
+      <button disabled={text.length===0} className={`btn btn-${props.mode} mx-2 my-2`} onClick={handleUpClick}>Convert to uppercase</button>
+      <button disabled={text.length===0} className={`btn btn-${props.mode} mx-2 my-2`} onClick={handleLoClick}>Convert to lowercase</button>
+      <button disabled={text.length===0} className={`btn btn-${props.mode} mx-2 my-2`} onClick={handleClearClick}>Clear text</button>
+      <button disabled={text.length===0} className={`btn btn-${props.mode} mx-2 my-2`} onClick={handleCopy}>Copy text</button>
+      <button disabled={text.length===0} className={`btn btn-${props.mode} mx-2 my-2`} onClick={handleExtraSpace}>Remove extra space</button>
+      <button disabled={text.length===0} type="submit" onClick={speak} className="btn btn-warning mx-2 my-2" id="toggle">Speak</button>
     </div>
     <div className="container my-2">
       <h2>Your text summary</h2>
